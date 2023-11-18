@@ -21,7 +21,7 @@ async function runServer() {
     await connectDb()
         .then(() => {
 
-            app.post('/create-menus', async (req, res) => {
+            app.post('/create-menus', async (req, res) => { //
                 try {
                     const menuItems = await Menu.create(
                         {
@@ -68,7 +68,7 @@ async function runServer() {
                     res.status(500).json({ error: 'Internal Server Error' });
                 }
             });
-            app.get('/filter-restaurants', async (req, res) => {
+            app.get('/filter-restaurants', async (req, res) => { //Problem2
                 try {
                     const restaurants = await Restaurant.find({
                         'description': { $regex: /lahmacun/i },
@@ -82,7 +82,7 @@ async function runServer() {
                                 $minDistance: 0,
                             },
                         },
-                    }).populate('address');
+                    }).populate('address').limit(5);
 
                     if (!restaurants) {
                         return res.status(404).json({ message: 'Restaurants not found' });
