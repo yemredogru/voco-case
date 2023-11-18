@@ -21,7 +21,7 @@ async function runServer() {
     await connectDb()
         .then(() => {
 
-            app.post('/create-menus', async (req, res) => { //
+            app.post('/create-menus', async (req, res) => { //problem3
                 try {
                     const menuItems = await Menu.create(
                         {
@@ -52,7 +52,7 @@ async function runServer() {
                     res.status(500)
                 }
             })
-            app.get('/restaurants', async (req, res) => {
+            app.get('/restaurants', async (req, res) => { //problem6
 
                 const page = parseInt(req.query.page) || 1;
                 const limit = 10;
@@ -96,7 +96,7 @@ async function runServer() {
             });
 
             var page = 0;
-            app.get('/reviews', async (req, res) => {
+            app.get('/reviews', async (req, res) => { //problem4
                 try {
                     const skipCount = 20 * page
                     const reviews = await Review
@@ -119,7 +119,7 @@ async function runServer() {
                     console.error('Sorgu hatası:', error);
                 }
             })
-            app.get('/matches', async (req, res) => {
+            app.get('/matches', async (req, res) => { //problem5
                 try {
                     const pipeline = [
                         {
